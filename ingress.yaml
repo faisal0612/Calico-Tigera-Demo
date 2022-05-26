@@ -1,0 +1,43 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: faisal-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    kubernetes.io/ingress.class: "nginx"
+  namespace: dev1
+spec:
+#  ingressClassName: nginx
+  rules:
+  - host: shahnaama.com
+    http:
+      paths:
+      - path: /productpage
+        pathType: Prefix
+        backend:
+          service:
+            name: productpage
+            port:
+              number: 80
+      - path: /reviews
+        pathType: Prefix
+        backend:
+          service:
+            name: reviews
+            port:
+              number: 80
+      - path: /ratings
+        pathType: Prefix
+        backend:
+          service:
+            name: ratings
+            port:
+              number: 80
+      - path: /details
+        pathType: Prefix
+        backend:
+          service:
+            name: details
+            port:
+              number: 80
